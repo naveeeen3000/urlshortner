@@ -52,7 +52,7 @@ class URLView(APIView):
             cache.delete('urls')
             return Response(status=status.HTTP_200_OK)
         else:
-            return Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error":"short url not found."},status=status.HTTP_400_BAD_REQUEST)
         
 
     def patch(self,request):
@@ -60,15 +60,15 @@ class URLView(APIView):
         request_data = request.data
         if not request_data:
             return Response({"error":"data not found in request."},status=status.HTTP_400_BAD_REQUEST)
-        short_url = request_data.get("short_url")
+        slug = request_data.get("slug")
         new_long_url = request_data.get("long_url")
-        if not short_url or not new_long_url:
+        if not slug or not new_long_url:
             return Response({"error":"provide all the fields in request"},status=status.HTTP_400_BAD_REQUEST)
-        modified = self.url_manager.modify(new_long_url,short_url)
+        modified = self.url_manager.modify(new_long_url,slug)
         if modified:
             cache.delete('urls')
             return Response(status=status.HTTP_200_OK)
-        return Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({"error":"short url not found."},status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

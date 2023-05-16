@@ -14,8 +14,12 @@ class URLManager:
     
     def delete(self,slug):
         """delete a url object."""
-        deleted = URLBase.objects.get(short_url = slug).delete()
-        return deleted
+        try:
+            url_obj = URLBase.objects.get(short_url = slug)
+            deleted = url_obj.delete()
+            return deleted
+        except URLBase.DoesNotExist:
+            return None
     
     def modify(self,long_url,short_url):
         """modify the long url."""
