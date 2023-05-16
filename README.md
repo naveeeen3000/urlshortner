@@ -13,12 +13,13 @@ A simple URL shortener built using Django.
 1. Clone the repository:
 
    ```shell
-    git clone https://github.com/your-username/django-url-shortener.git
-    cd django-url-shortener
+    git clone https://github.com/naveeeen3000/urlshortner.git
+    cd urlshortner
     
     python3 -m venv env
     source env/bin/activate
     pip install -r requirements.txt
+    python manage.py makemigrations
     python manage.py migrate
     python manage.py runserver
 Visit http://localhost:8000 in your web browser.
