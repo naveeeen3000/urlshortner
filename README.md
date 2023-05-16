@@ -5,7 +5,6 @@ A simple URL shortener built using Django.
 ## Features
 
 - Allows users to shorten long URLs.
-- Keeps track of the number of times a shortened URL has been visited.
 - Customizable URLs.
 
 ## Installation
